@@ -27,6 +27,11 @@ class SimpleViewResolver implements IViewResolver {
 		$filename = stream_resolve_include_path($this->viewsPath.$name.'.php');
 		if($filename) {
 			$fileview = $filename;
+		} else {
+			$filename = stream_resolve_include_path($this->viewsPath.$name);
+			if($filename) {
+				$fileview = $filename;
+			}
 		}
 
 		return $fileview;

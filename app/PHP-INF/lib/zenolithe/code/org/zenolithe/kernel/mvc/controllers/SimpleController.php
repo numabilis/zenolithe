@@ -33,7 +33,7 @@ class SimpleController implements IController {
   
   public function handleRequest(Request $request) {
   	$model = $this->buildModel($request);
-  	$model->setViewName($this->view);
+  	$model->setViewName($this->viewName);
   	
     return $model;
   }

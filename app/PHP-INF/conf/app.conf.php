@@ -12,7 +12,7 @@ return array(
 	'cache.active' => true,
 	'cache.clearonexit' => false,
 	'locale.default' => 'en',
-	'locale.supportedlocales' => 'en/fr/es/it/de/ja/pt/zh-hant/zh/ru/',
+	'locale.supportedlocales' => 'en/fr/',
 	'mail.host' => '127.0.0.1',
 	'mail.port' => '25',
 /*
@@ -23,7 +23,7 @@ return array(
 	),
 */
 	'error.view' => 'errors/error',
-	'error.404uri' => 'error404/',
+	'error.404uri' => 'errors/404.php',
 	'zenolithe.modules.conf' => 'conf/modules/',
 	'zenolithe.components.conf' => 'conf/components/',
 	'zenolithe.templates.conf' => 'conf/templates/',
