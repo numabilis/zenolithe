@@ -1,8 +1,9 @@
 <?php
 return array(
-		'lib/zenolithe-cms/',
+		'lib/perfony/',
+//		'lib/zenolithe-cms/',
 		'lib/zenolithe/',
-		'lib/mobiledetect/',
-		'lib/elfinder/'
+//		'lib/mobiledetect/',
+//		'lib/elfinder/'
 );
 ?>

@@ -21,7 +21,7 @@ function autoloader($className) {
 	$class_file_path = str_replace('_', '/', $className) . '.php';
 	if((@include 'code/'.$class_file_path) !== 1) {
 		$class_file_path = str_replace('\\', '/', $className) . '.php';
-		include 'code/'.$class_file_path;
+		@include 'code/'.$class_file_path;
 	}
 }
 spl_autoload_register('autoloader');
@@ -65,11 +65,14 @@ $appConf['application.host'] = $_SERVER['SERVER_NAME'];
 $appConf['zenolithe.root'] = $zenolitheRootPath;
 
 $container = IocContainer::getInstance($appConf);
-foreach($container->get('includes') as $file) {
-	require($file);
+if($container->get('includes')) {
+	foreach($container->get('includes') as $file) {
+		require($file);
+	}
 }
 
 // TODO : remove that code
+/*
 global $dbType;
 $dbType = strtolower($container->get('database')->getType());
 function daf_file($daf_filename) {
@@ -83,6 +86,7 @@ function daf_file($daf_filename) {
 
 	return $filename;
 }
+*/
 
 $modules = require('conf/modules.conf.php');
 foreach($modules as $module) {
@@ -121,7 +125,9 @@ if($appConf['context.debug']) {
 }
 
 // TODO : move this code to the cache popo
+/*
 if($container->get('cache')->getClearOnExit()) {
 	$container->get('cache')->clearUserCache();
 }
+*/
 ?>

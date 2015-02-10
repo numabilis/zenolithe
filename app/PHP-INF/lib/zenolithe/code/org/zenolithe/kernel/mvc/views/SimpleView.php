@@ -24,7 +24,7 @@ class SimpleView implements IView {
     return $this->stringResolver->getString($key, $lang, $strict);
   }
   
-  public function render(IModel $model, $exception=null) {
+  public function render(IModel $model=null, $exception=null) {
     require($this->name);
   }
 }

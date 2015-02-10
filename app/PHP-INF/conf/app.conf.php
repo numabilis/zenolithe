@@ -15,11 +15,13 @@ return array(
 	'locale.supportedlocales' => 'en/fr/es/it/de/ja/pt/zh-hant/zh/ru/',
 	'mail.host' => '127.0.0.1',
 	'mail.port' => '25',
+/*
 	'includes' => array(
 			'lib/hacks/functions.php',
 			'lib/zenolithe-cms/code/dafs/pg/zenolithe/common.daf.php',
 			'lib/zenolithe-cms/conf/definitions/acl.conf.php'
 	),
+*/
 	'error.view' => 'errors/error',
 	'error.404uri' => 'error404/',
 	'zenolithe.modules.conf' => 'conf/modules/',

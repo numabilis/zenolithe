@@ -6,7 +6,6 @@ use org\zenolithe\kernel\http\Request;
 class LocaleResolverFromHttpHeaders implements ILocaleResolver {
 	private $defaultLocale;
 	private $supportedLocales;
-	private $session;
 	
 	public function setDefaultLocale($defaultLocale) {
 		$this->defaultLocale = $defaultLocale;
@@ -14,10 +13,6 @@ class LocaleResolverFromHttpHeaders implements ILocaleResolver {
 	
 	public function setSupportedLocales($supportedLocales) {
 		$this->supportedLocales = $supportedLocales;
-	}
-	
-	public function setSession($session) {
-		$this->session = $session;
 	}
 	
 	public function resolve(Request $request) {

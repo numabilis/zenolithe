@@ -1,7 +1,7 @@
 zenolithe MVC2 PHP Framework
 ============================
 
-Zenolithe is a personnal project started in 2006 that aim to build a simple, lightweight but powerfull framework.
+Zenolithe is a personnal project started in 2006 that aim to build a simple, lightweight but powerfull and highly modular framework.
 
 I have in mind the following ideas when developping it :
 

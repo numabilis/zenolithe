@@ -10,6 +10,9 @@ class IocContainer {
 		if(!self::$instance) {
 			self::$instance = new IocContainer($registry);
 		}
+		foreach($registry['ioc.init'] as $toInitialize) {
+			self::$instance->get($toInitialize);
+		}
 		
 		return self::$instance;
 	}
@@ -17,7 +20,6 @@ class IocContainer {
 	private function __construct($registry = array()) {
 		$this->registry = $registry;
 		$this->registry['ioc.container'] = $this;
-		$this->registry['iocInitiator'] = $this->get('iocInitiator');
 	}
 	
 	public function get($name) {
@@ -28,7 +30,7 @@ class IocContainer {
 		} else if(isset($this->registry[$name])) {
 			$object = $this->registry[$name];
 		} else {
-			$definition = @include('ioc/'.$name.'.conf.php');
+			$definition = @include('conf/ioc/'.$name.'.conf.php');
 			if($definition) {
 				$object = new $definition['class'];
 				$this->inject($object, $definition);

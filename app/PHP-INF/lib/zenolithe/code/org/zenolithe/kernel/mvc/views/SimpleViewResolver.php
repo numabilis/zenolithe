@@ -8,7 +8,7 @@ class SimpleViewResolver implements IViewResolver {
 		$this->viewsPath = $viewsPath;
 	}
 	
-	public function resolve($name, $local) {
+	public function resolve($name, $locale) {
 		$view = null;
 
 		$filename = $this->filepath($name, $locale);

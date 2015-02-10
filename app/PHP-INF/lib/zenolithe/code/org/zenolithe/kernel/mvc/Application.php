@@ -51,13 +51,13 @@ class Application implements IModule {
 		$route = null;
 		$model = null;
 		$view = null;
-
+		
 		try {
 			$locale = $this->iocContainer->get('localeResolver')->resolve($request);
 			$request->setLocale($locale);
 			$route = $this->iocContainer->get('router')->resolve($request);
 			$viewResolver = $this->iocContainer->get('viewResolver');
-			
+
 			if(!$route) {
 				$view_name = substr($request->url, 0, strrpos($request->url, "."));
 				$view = $viewResolver->resolve($view_name, $locale);
