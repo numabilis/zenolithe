@@ -7,30 +7,30 @@ use org\zenolithe\kernel\bootstrap\Context;
 class DecoratedInterceptorsRouteResolver implements IRouteResolver {
 	private $iocContainer;
 	private $routesPath;
-	
+
 	public function setRoutesPath($routesPath) {
 		$this->routesPath = $routesPath;
 	}
-		
+
 	public function setIocContainer($iocContainer) {
 		$this->iocContainer = $iocContainer;
 	}
-	
+
 	public function resolve(Request $request) {
 		$route = null;
 		$controller = null;
-		$interceptors = array();
-		$routesDir = $this->routesPath.$request->getLocale().'/';
-		$filename = stream_resolve_include_path($routesDir.$request->url);
+		$interceptors = array ();
+		$routesDir = $this->routesPath . $request->getLocale() . '/';
+		$filename = stream_resolve_include_path($routesDir . $request->url);
 		if(!$filename) {
 			$routesDir = $this->routesPath;
-			$filename = stream_resolve_include_path($routesDir.$request->url);
+			$filename = stream_resolve_include_path($routesDir . $request->url);
 		}
 		
 		if(is_file($filename)) {
-			$filename = stream_resolve_include_path($routesDir.'zenolithe-filter.php');
+			$filename = stream_resolve_include_path($routesDir . 'zenolithe-filter.php');
 			if(is_file($filename)) {
-				$defs = require($filename);
+				$defs = require ($filename);
 				if(isset($defs['interceptors'])) {
 					foreach($defs['interceptors'] as $def) {
 						$interceptor = $this->iocContainer->get($def['interceptor']);
@@ -45,10 +45,10 @@ class DecoratedInterceptorsRouteResolver implements IRouteResolver {
 			array_pop($dirs);
 			$dirpath = '';
 			foreach($dirs as $dir) {
-				$dirpath .= $dir .'/';
-				$filename = stream_resolve_include_path($routesDir.$dirpath.'zenolithe-filter.php');
+				$dirpath .= $dir . '/';
+				$filename = stream_resolve_include_path($routesDir . $dirpath . 'zenolithe-filter.php');
 				if(is_file($filename)) {
-					$defs = require($filename);
+					$defs = require ($filename);
 					if(isset($defs['interceptors'])) {
 						foreach($defs['interceptors'] as $def) {
 							$interceptor = $this->iocContainer->get($def['interceptor']);
@@ -60,10 +60,16 @@ class DecoratedInterceptorsRouteResolver implements IRouteResolver {
 					}
 				}
 			}
-		
-			$def = require($routesDir.$request->url);
+			$def = require ($routesDir . $request->url);
 			if(is_array($def)) {
 				$controller = $this->iocContainer->get($def['controller']);
+				if(isset($def['interceptors'])) {
+					foreach($def['interceptors'] as $interceptorDef) {
+						$interceptor = $this->iocContainer->get($interceptorDef['interceptor']);
+						$this->iocContainer->inject($interceptor, $interceptorDef);
+						$interceptors[] = $interceptor;
+					}
+				}
 			} else {
 				$controller = $def;
 			}

@@ -2,26 +2,26 @@
 namespace org\zenolithe\kernel\ioc;
 
 class IocContainer {
-	static private $instance;
-	private $registry = array();
-	private $requestRegistry = array();
-	
+	private static $instance;
+	private $registry = array ();
+	private $requestRegistry = array ();
+
 	static public function getInstance($registry = array()) {
 		if(!self::$instance) {
 			self::$instance = new IocContainer($registry);
-		}
-		foreach($registry['ioc.init'] as $toInitialize) {
-			self::$instance->get($toInitialize);
+			foreach($registry['ioc.init'] as $toInitialize) {
+				self::$instance->get($toInitialize);
+			}
 		}
 		
 		return self::$instance;
 	}
-	
+
 	private function __construct($registry = array()) {
 		$this->registry = $registry;
 		$this->registry['ioc.container'] = $this;
 	}
-	
+
 	public function get($name) {
 		$object = null;
 		
@@ -30,9 +30,9 @@ class IocContainer {
 		} else if(isset($this->registry[$name])) {
 			$object = $this->registry[$name];
 		} else {
-			$definition = @include('conf/ioc/'.$name.'.conf.php');
+			$definition = @include ('conf/ioc/' . $name . '.conf.php');
 			if($definition) {
-				$object = new $definition['class'];
+				$object = new $definition['class']();
 				$this->inject($object, $definition);
 				$this->registry[$name] = $object;
 			}
@@ -40,24 +40,24 @@ class IocContainer {
 		
 		return $object;
 	}
-	
+
 	public function set($name, $object, $definition = null) {
 		if($definition) {
 			$this->inject($object, $definition);
 		}
 		$this->requestRegistry[$name] = $object;
 	}
-	
+
 	public function remove($name) {
 		unset($this->requestRegistry[$name]);
 	}
-	
+
 	public function inject($object, $definition) {
 		if(isset($definition['injected']) && $definition['injected']) {
 			foreach($definition['injected'] as $attribute => $injectable) {
-				$setter = 'set'.ucfirst($attribute);
+				$setter = 'set' . ucfirst($attribute);
 				if(is_array($injectable)) {
-					$arry = array();
+					$arry = array ();
 					foreach($injectable as $inj) {
 						$arry[] = $this->get($inj);
 					}
@@ -77,14 +77,14 @@ class IocContainer {
 					$i = 0;
 					foreach($valueParts as $valuePart) {
 						if($i % 2) {
-							$finalValue .= $this->get(substr($valuePart, 1, strlen($valuePart) -2));
+							$finalValue .= $this->get(substr($valuePart, 1, strlen($valuePart) - 2));
 						} else {
 							$finalValue .= $valuePart;
 						}
 						$i++;
 					}
 				}
-				$setter = 'set'.ucfirst($attribute);
+				$setter = 'set' . ucfirst($attribute);
 				$object->$setter($finalValue);
 			}
 		}
