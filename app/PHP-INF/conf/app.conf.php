@@ -11,6 +11,7 @@ return array(
 	'logger.timezone' => 'Europe/Paris',
 	'cache.active' => true,
 	'cache.clearonexit' => false,
+	'cache.type' => 'xCache',
 	'locale.default' => 'en',
 	'locale.supportedlocales' => 'en/fr/',
 	'mail.host' => '127.0.0.1',

@@ -123,11 +123,4 @@ if($appConf['context.debug']) {
 	}
 	debug($uri." [U: ".$utime." ms | S: ".$stime." ms | T: ".($utime+$stime)." ms | E: ".$etime." ms]");
 }
-
-// TODO : move this code to the cache popo
-/*
-if($container->get('cache')->getClearOnExit()) {
-	$container->get('cache')->clearUserCache();
-}
-*/
 ?>
