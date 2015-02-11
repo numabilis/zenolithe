@@ -2,6 +2,7 @@
 namespace org\zenolithe\kernel\http;
 
 class Url {
+	static private $_instance;
 	protected $scheme;
 	protected $host;
 	protected $documentRoot;
@@ -70,5 +71,19 @@ class Url {
 		}
 	
 		return $this->scheme.'://'.$this->host.$this->documentRoot.$this->script.$str;
+	}
+	
+	private static function getInstance() {
+		if(self::$_instance == null) {
+			self::$_instance = new Url();
+		}
+		
+		return self::$_instance;
+	}
+	
+	public static function base() {
+		$instance = self::getInstance();
+		
+		return $instance->scheme.'://'.$instance->host.$instance->documentRoot;
 	}
 }

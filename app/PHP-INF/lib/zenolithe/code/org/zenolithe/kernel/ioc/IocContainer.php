@@ -55,7 +55,17 @@ class IocContainer {
 		
 		return $object;
 	}
-
+	
+	public function exists($name) {
+		$exists = false;
+		
+		if(isset($this->requestRegistry[$name]) || isset($this->applicationRegistry[$name])) {
+			$exists = true;
+		}
+		
+		return $exists;
+	}
+	
 	public function set($name, $object, $definition = null) {
 		if($definition) {
 			$this->inject($object, $definition);
@@ -117,7 +127,18 @@ class IocContainer {
 					}
 					$object->$setter($arry);
 				} else {
-					$object->$setter($this->get($injectable));
+					$valueParts = preg_split('/({[^{}]*})/', $injectable, 0, PREG_SPLIT_DELIM_CAPTURE);
+					$finalValue = '';
+					$i = 0;
+					foreach($valueParts as $valuePart) {
+						if($i % 2) {
+							$finalValue .= $this->get(substr($valuePart, 1, strlen($valuePart) - 2));
+						} else {
+							$finalValue .= $valuePart;
+						}
+						$i++;
+					}
+					$object->$setter($this->get($finalValue));
 				}
 			}
 		}
