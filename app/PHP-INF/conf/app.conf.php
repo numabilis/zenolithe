@@ -1,10 +1,12 @@
 <?php
 return array(
-	'context.debug' => true,
-	'database.host' => 'localhost',
-	'database.user' => 'postgres',
+	'user.prefs.default.background.image' => 'heaven1.jpg',
+	'context.debug' => false,
+	'database.engine' => 'mysql',
+	'database.host' => '',
+	'database.user' => '',
 	'database.password' => '',
-	'database.name' => 'sandbox',
+	'database.name' => '',
 	'logger.level' => 3,
 	'logger.filepath' => '../logs/zenolithe.log',
 	'logger.dateformat' => 'm/d/Y H:i:s',
@@ -32,6 +34,7 @@ return array(
 	'zenolithe.pages.conf' => 'conf/pages/',
 	'zenolithe.views.path' => 'views/',
 	'zenolithe.routes.path' => 'routes/',
-	'ioc.init' => array('loggerWrapper')
+	'ioc.init' => array('loggerWrapper'),
+	'includes' => array(),
 );
 ?>

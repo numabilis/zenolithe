@@ -23,7 +23,7 @@ class IocContainer {
 	}
 
 	public function get($name) {
-		$object = null;
+		$object = $name;
 		
 		if(isset($this->requestRegistry[$name])) {
 			$object = $this->requestRegistry[$name];
@@ -122,8 +122,8 @@ class IocContainer {
 				$setter = 'set' . ucfirst($attribute);
 				if(is_array($injectable)) {
 					$arry = array ();
-					foreach($injectable as $inj) {
-						$arry[] = $this->get($inj);
+					foreach($injectable as $key => $inj) {
+						$arry[$key] = $this->get($inj);
 					}
 					$object->$setter($arry);
 				} else {

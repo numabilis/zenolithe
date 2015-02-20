@@ -212,7 +212,9 @@ class FileLogger implements ILogger {
 	}
 	
 	public function errorHandler($errno, $errstr, $errfile=null, $errline=0, array $errcontext=null) {
-		$errfile = $this->trimFileName($errfile);
+		if($errfile) {
+			$errfile = $this->trimFileName($errfile);
+		}
 		switch ($errno) {
 			case E_ERROR:
 			case E_CORE_ERROR:
