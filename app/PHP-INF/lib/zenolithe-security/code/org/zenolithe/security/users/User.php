@@ -5,10 +5,16 @@ define('USER_STATUS_INACTIVE', 0);
 define('USER_STATUS_ACTIVE', 1);
 
 class User {
+	const USER_CIVILITY_UNKNOWN = 0;
+	const USER_CIVILITY_MR = 1;
+	const USER_CIVILITY_MRS = 2;
+	const USER_CIVILITY_MISS = 3;
+	
 	protected $id;
 	protected $login;
 	protected $password;
 	protected $email;
+	protected $civility;
 	protected $firstname;
 	protected $lastname;
 	protected $profiles = array();
@@ -46,6 +52,14 @@ class User {
 		$this->email = $email;
 	}
 	
+	public function getCivility() {
+		return $this->civility;
+	}
+	
+	public function setCivility($civility) {
+		$this->civility = $civility;
+	}
+	
 	public function getFirstname() {
 		return $this->firstname;
 	}
@@ -76,5 +90,9 @@ class User {
 	
 	public function setStatus($status) {
 		$this->status = $status;
+	}
+	
+	public function hasProfile($profile) {
+		return in_array($profile, $this->profiles);
 	}
 }

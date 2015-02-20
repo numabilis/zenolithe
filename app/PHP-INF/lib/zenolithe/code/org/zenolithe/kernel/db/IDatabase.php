@@ -14,5 +14,6 @@ interface IDatabase {
 // 	public function initialize($host, $user, $password, $name);
 	public function connect();
 	public function queryToArray($sql);
+	public function queryScalar($sql);
 }
 ?>

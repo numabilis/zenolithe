@@ -3,15 +3,15 @@ namespace org\zenolithe\kernel\mvc;
 
 use ArrayAccess;
 
-class SimpleModel implements ArrayAccess, IModel {
+class SimpleModel implements IModel {
 	private $viewName;
-	private $content = array();
+// 	private $content = array();
 	private $container = array();
 	private $locale;
 
-	public function __construct() {
-		$this->set('model', $this);
-	}
+// 	public function __construct() {
+// 		$this->set('model', $this);
+// 	}
 	
 	public function get($name) {
 		$value = null;
@@ -44,7 +44,7 @@ class SimpleModel implements ArrayAccess, IModel {
 		$this->viewName = $viewName;
 		$this->container['viewName'] = $viewName;
 	}
-	
+/*	
 	public function offsetSet($offset, $value) {
 		if(is_null($offset)) {
 			$this->container[] = $value;
@@ -64,5 +64,6 @@ class SimpleModel implements ArrayAccess, IModel {
 	public function offsetGet($offset) {
 		return isset($this->container[$offset]) ? $this->container[$offset] : null;
 	}
+*/
 }
 ?>

@@ -11,19 +11,15 @@ class Cacher implements IModule {
 	}
 	
 	public function init() {
-		
 	}
 	
 	public function setUp() {
-		
 	}
 	
 	public function run() {
-		
 	}
 	
 	public function tearDown() {
-		
 	}
 	
 	public function finish() {

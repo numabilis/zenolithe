@@ -76,8 +76,8 @@ namespace {
 	set_exception_handler('exception_handler');
 	
 	// Required function to log an exception.
-	function exception_error(Exception $exception) {
-		exception_handler($exception);
-	}
+// 	function exception_error(Exception $exception) {
+// 		exception_handler($exception);
+// 	}
 }
 ?>

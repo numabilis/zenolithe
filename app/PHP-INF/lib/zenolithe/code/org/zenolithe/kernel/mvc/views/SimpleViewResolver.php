@@ -2,7 +2,12 @@
 namespace org\zenolithe\kernel\mvc\views;
 
 class SimpleViewResolver implements IViewResolver {
-	private $viewsPath;
+	protected $viewsPath;
+	protected $stringResolver;
+	
+	public function setStringResolver($stringResolver) {
+		$this->stringResolver = $stringResolver;
+	}
 	
 	public function setViewsPath($viewsPath) {
 		$this->viewsPath = $viewsPath;
@@ -15,7 +20,8 @@ class SimpleViewResolver implements IViewResolver {
 		if($filename) {
 			$view = new SimpleView();
 			$view->setLocale($locale);
-			$view->name = $filename;
+			$view->setStringResolver($this->stringResolver);
+			$view->setName($filename);
 		}
 
 		return $view;
