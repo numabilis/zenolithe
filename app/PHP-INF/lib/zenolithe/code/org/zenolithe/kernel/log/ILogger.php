@@ -1,6 +1,8 @@
 <?php
 namespace org\zenolithe\kernel\log;
 
+use \Exception;
+
 interface ILogger {
 	public function error($message, $stack=null);
 	public function warn($message);

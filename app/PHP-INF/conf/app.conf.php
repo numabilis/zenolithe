@@ -34,6 +34,7 @@ return array(
 	'zenolithe.pages.conf' => 'conf/pages/',
 	'zenolithe.views.path' => 'views/',
 	'zenolithe.routes.path' => 'routes/',
+	'application.base' => '/',
 	'ioc.init' => array('loggerWrapper'),
 	'includes' => array(),
 );

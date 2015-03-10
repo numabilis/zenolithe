@@ -1,6 +1,8 @@
 <?php
 namespace org\zenolithe\kernel\http;
 
+use org\zenolithe\kernel\ioc\IocContainer;
+
 class Url {
 	static private $_instance;
 	protected $scheme;
@@ -11,8 +13,10 @@ class Url {
 	protected $canonicalParameters = array();
 	
 	public function __construct() {
-		$appName = substr($_SERVER['SCRIPT_FILENAME'], strlen($_SERVER['DOCUMENT_ROOT']));
-		$this->documentRoot = substr($appName, 0, strrpos($appName, '/') + 1);
+		$iocContainer = IocContainer::getInstance();
+// 		$appName = substr($_SERVER['SCRIPT_FILENAME'], strlen($_SERVER['DOCUMENT_ROOT']));
+// 		$this->documentRoot = substr($appName, 0, strrpos($appName, '/') + 1);
+		$this->documentRoot = $iocContainer->get('application.base');
 		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) {
 			$this->scheme = 'https';
 		} else {

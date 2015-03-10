@@ -34,6 +34,8 @@
 
 namespace org\zenolithe\kernel\log;
 
+use \Exception;
+
 class FileLogger implements ILogger {
 	private $level;
 	private $filePath;

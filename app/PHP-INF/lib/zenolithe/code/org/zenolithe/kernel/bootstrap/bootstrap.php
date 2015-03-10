@@ -60,9 +60,12 @@ if($appConf['context.debug']) {
 }
 $appConf['document.root'] = $_SERVER['DOCUMENT_ROOT'];
 $appConf['application.path'] = $appRootPath;
-//$appConf['application.base'] = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
-$name = substr($_SERVER['SCRIPT_FILENAME'], strlen($_SERVER['DOCUMENT_ROOT']));
-$appConf['application.base'] = substr($name, 0, strrpos($name, '/')+1);
+if(!isset($appConf['application.base'])) {
+	$appConf['application.base'] = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'));
+	// $appConf['application.base'] = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
+	// $name = substr($_SERVER['SCRIPT_FILENAME'], strlen($appRootPath));
+	// $appConf['application.base'] = substr($name, 0, strrpos($name, '/')+1);
+}
 $appConf['application.host'] = $_SERVER['SERVER_NAME'];
 $appConf['zenolithe.root'] = $zenolitheRootPath;
 

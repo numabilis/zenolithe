@@ -22,9 +22,17 @@ class DecoratedInterceptorsRouteResolver implements IRouteResolver {
 		$interceptors = array ();
 		$routesDir = $this->routesPath . $request->getLocale() . '/';
 		$filename = stream_resolve_include_path($routesDir . $request->url);
-		if(!$filename) {
+		if(!$filename || !is_file($filename)) {
 			$routesDir = $this->routesPath;
 			$filename = stream_resolve_include_path($routesDir . $request->url);
+			if(!$filename || !is_file($filename)) {
+				$routesDir = $this->routesPath . $request->getLocale() . '/';
+				$filename = stream_resolve_include_path($routesDir . $request->url . '.php');
+				if(!$filename || !is_file($filename)) {
+					$routesDir = $this->routesPath;
+					$filename = stream_resolve_include_path($routesDir . $request->url . '.php');
+				}
+			}
 		}
 		if(is_file($filename)) {
 			$filterFilename = stream_resolve_include_path($routesDir . 'zenolithe-filter.php');
