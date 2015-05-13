@@ -84,6 +84,7 @@ class IocContainer {
 		
 		if(isset($definition['alias'])) {
 			$object = $this->get($definition['alias']);
+			$this->inject($object, $definition);
 		} else {
 			$name = $definition['name'];
 			if(isset($definition['scope'])) {
