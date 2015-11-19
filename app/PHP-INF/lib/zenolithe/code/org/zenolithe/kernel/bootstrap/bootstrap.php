@@ -13,7 +13,9 @@ ini_set('error_log', realpath($applicationPath.'../logs').'/php.log');
 ini_set('display_errors', false);
 
 // Timing initialization
-$time_begin = getrusage();
+if(function_exists('getrusage')) {
+	$time_begin = getrusage();
+}
 $mtime_begin = microtime();
 
 // Autoloading function
@@ -92,12 +94,16 @@ foreach($modules as $module) {
 foreach($modules as $module) {
 	$container->get($module)->finish();
 }
-$time_end = getrusage();
 if($appConf['context.debug']) {
-	$utime_begin = $time_begin["ru_utime.tv_sec"]*1000000 + $time_begin["ru_utime.tv_usec"];
-	$stime_begin = $time_begin["ru_stime.tv_sec"]*1000000 + $time_begin["ru_stime.tv_usec"];
-	$utime = round(($time_end["ru_utime.tv_sec"]*1000000 + $time_end["ru_utime.tv_usec"] - $utime_begin)/1000);
-	$stime = round(($time_end["ru_stime.tv_sec"]*1000000 + $time_end["ru_stime.tv_usec"] - $stime_begin)/1000);
+	$utime = 0;
+	$stime = 0;
+	if(function_exists('getrusage')) {
+		$time_end = getrusage();
+		$utime_begin = $time_begin["ru_utime.tv_sec"]*1000000 + $time_begin["ru_utime.tv_usec"];
+		$stime_begin = $time_begin["ru_stime.tv_sec"]*1000000 + $time_begin["ru_stime.tv_usec"];
+		$utime = round(($time_end["ru_utime.tv_sec"]*1000000 + $time_end["ru_utime.tv_usec"] - $utime_begin)/1000);
+		$stime = round(($time_end["ru_stime.tv_sec"]*1000000 + $time_end["ru_stime.tv_usec"] - $stime_begin)/1000);
+	}
 	list($sec, $usec) = explode(" ", $mtime_begin);
 	$etime_begin = (float) $sec + (float )$usec;
 	list($sec,$usec)=explode(" ",microtime());

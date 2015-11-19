@@ -78,7 +78,6 @@ class MySQLDatabase implements IDatabase {
 			error('MySQL : ' . $sql . ' in ' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 		} else {
 			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-			debug($row);
 			$scalar = $row[0];
 			mysqli_free_result($result);
 		}

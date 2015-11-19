@@ -148,5 +148,13 @@ class Request {
 	public function setLocale($locale) {
 		$this->locale = $locale;
 	}
+	
+	/**
+	 * Returns the user IP address.
+	 * @return string user IP address
+	 */
+	public function getUserHostAddress() {
+		return isset($_SERVER['REMOTE_ADDR'])?$_SERVER['REMOTE_ADDR']:'0.0.0.0';
+	}
 }
 ?>
