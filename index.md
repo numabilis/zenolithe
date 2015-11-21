@@ -2,6 +2,7 @@
 layout: home
 title: Zenolithe by numabilis
 ---
+{{site.baseurl}}
 <h2><a id="zenolithe-mvc2-php-framework" class="anchor" href="#zenolithe-mvc2-php-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Zenolithe MVC2 PHP Framework</h2>
 
 <p>Zenolithe is a personnal project started in 2006 that aim to build a simple, lightweight but powerfull and highly modular framework.</p>
