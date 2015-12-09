@@ -20,3 +20,5 @@ What are the characteristics of such a framework ?
 * Simple and extendable dependency injection mechanism
 * Simple MVC2 implementation
 * Request interception mechanism
+
+Read the [documentation](http://numabilis.github.io/zenolithe/) (work in progress).
