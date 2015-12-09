@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+    {% include en/head.html %}
+
+    <body>
+    
+        {% include en/page-top.html %}
+        
+        <div class="wrapper">
+        
+            {% include en/{{page.section}}-menu-top.html %}
+            
+            <div class="page-content">
+                <section>
+                    {{ content }}
+                </section>
+            </div>
+            
+            {% include en/{{page.section}}-menu-footer.html %}
+            
+        </div>
+        
+        {% include en/page-footer.html %}
+        
+    </body>
+
+</html>

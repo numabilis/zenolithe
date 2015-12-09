@@ -1,0 +1,18 @@
+---
+layout: en/documentation
+title: Quick Start > Configuration | Zenolithe
+section: quick-start
+menu: configuration
+---
+<h2>Configuration</h2>
+
+<p>You configure your application using files in the <code>PHP-INF/conf</code> folder. We will see later in details the configuration files.</p>
+<p>To add your own application, <code>samples</code> for examples, add <code>'lib/samples'</code> in the <code>includepath.conf.php</code> file which must look like:</p>
+<pre>
+return array(
+    'lib/zenolithe/',
+    'lib/samples/'
+);
+</pre>
+<p>That's it! Your application or library folder <code>samples</code> is now referenced by zenolithe and can be processed.</p>
+<p>You can now create your <a href="{{site.baseurl}}en/quick-start/first-html-page.html">first HTML page</a> for your application.</p>

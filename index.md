@@ -1,8 +1,7 @@
 ---
-layout: home
-title: Zenolithe by numabilis
+layout: en/home
+title: Zenolithe by Numabilis
 ---
-{{site.baseurl}}
 <h2><a id="zenolithe-mvc2-php-framework" class="anchor" href="#zenolithe-mvc2-php-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Zenolithe MVC2 PHP Framework</h2>
 
 <p>Zenolithe is a personnal project started in 2006 that aim to build a simple, lightweight but powerfull and highly modular framework.</p>
@@ -27,4 +26,4 @@ title: Zenolithe by numabilis
 <li>Simple and extendable dependency injection mechanism</li>
 <li>Simple MVC2 implementation</li>
 <li>Request interception mechanism</li>
-</ul>
+</ul> 
