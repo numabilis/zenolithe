@@ -1,0 +1,66 @@
+---
+layout: en/documentation
+title: Quick Start > First Controller | Zenolithe
+section: quick-start
+menu: first-controller
+---
+<h2>First Controller</h2>
+
+<p>In this installment, we'll see how to setup zenolithe to handle a request with our own controller. The exercice is to show a page that display the current current date
+and time. Amazing!</p>
+
+<h3>Define the route</h3>
+<p>As in the <a href="{{site.baseurl}}en/quick-start/first-controlled-page.html">preceding example</a> we define the route file <code>sample3.php</code> under
+the <code>routes</code> folder:</p>
+<pre>return array(
+    'controller' => array(
+        'class' => 'org\zenolithe\samples\ShowDateTimeController'
+    )
+);
+</pre>
+<p>This file declare a route (<code>sample3.php</code>) for which the request is handled by a controller which is an instance of the
+<code>org\zenolithe\samples\ShowDateTimeController</code>.</p>
+
+<h3>Define the controller</h3>
+<p>All the application's code is stored in a <code>code</code> folder under the <code>PHP-INF/lib/samples</code> folder. So we need to create it.</p>
+<p>The controller class is defined using namespace <code>org\zenolithe\samples</code>, so we need to create all these subfolders under the <code>code</code> folder
+and the <code>ShowDateTimeController.php</code> file in it. So we have the file <code>ShowDateTimeController.php</code> located in
+<code>PHP-INF/lib/samples/org/zenolithe/samples</code>. This file define the controller class which should implement the
+<code>org\zenolithe\kernel\mvc\controllers\IController</code> interface which define only one method:</p>
+<pre>public function handleRequest(Request $request);</pre>
+<p>Our controller look like:</p>
+<pre>namespace org\zenolithe\samples;
+
+use org\zenolithe\kernel\http\Request;
+use org\zenolithe\kernel\mvc\SimpleModel;
+use org\zenolithe\kernel\mvc\controllers\IController;
+
+class ShowDateTimeController implements IController {
+    public function handleRequest(Request $request) {
+        $model = new SimpleModel();
+        
+        $model->set('datetime', time());
+        
+        $model->setViewName('sample3-datetime');
+        
+        return $model;
+    }
+}
+</pre>
+</p>It defines a <code>model</code> whith some data, <code>datetime</code> which contains the current datetime. and define the view which has to be used to render the
+response (<code>sample3-datetime</code>).</p>
+
+<h3>Define the view</h3>
+<p>We create the <code>sample3-datetime.php</code> view file under the <code>views</code> folder :</p>
+<pre>&lt;!doctype html>
+&lt;html>
+    &lt;head>
+        &lt;title>Zenolithe sample 3&lt;/title>
+    &lt;/head>
+    &lt;body>
+        First controller! Executed on &lt;?php echo date('F j, Y, g:i:s a', $model->get('datetime')); ?>
+    &lt;/body>
+&lt;/html></pre>
+<p>In your browser go to to <code>http://localhost/myapp/sample3.php</code>.</p>
+<p>That's it!</p>
+<p>This is a basic example that could be <a href="{{site.baseurl}}en/quick-start/extending-controller.html">extended in many ways</a>.</p>
