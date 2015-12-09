@@ -5,3 +5,42 @@ section: quick-start
 menu: first-controlled-page
 ---
 <h2>First Controlled page</h2>
+
+<p>We refer as a <strong>controlled page</strong> a page that is served using a controller.</p>
+
+<h3>Define a route</h3>
+<p>First of all we need to tell what is the URL of that page. If we want to access this page using <code>http://localhost/myapp/sample2.php</code> for example we need to
+declare a route to <code>sample2.php</code>.</p>
+<p>Create a <code>routes</code> subfolder under <code>PHP-INF/lib/samples</code>. This folder will store all the routes definitions. A route is defined by a php file which
+location inside the <code>routes</code> folder is the same as the URL part from the app folder (<code>myapp</code>) in the browser location bar. For example if you want to
+define a route for the URL <code>http://localhost/myapp/path/to/the/file.php</code>, just create the file : <code>PHP-INF/lib/samples/routes/path/to/the/file.php</code>.</p>
+<p>For our example <code>http://localhost/samples/sample2.php</code> we create a file <code>sample2.php</code> inside the <code>routes</code> folder :</p>
+<pre>return array(
+    'controller' => array(
+        'class' => 'org\zenolithe\kernel\mvc\controllers\SimpleController',
+        'parameters' => array(
+            'viewName' => 'sample2-view'
+        )
+    )
+);
+</pre>
+<p>This file declare a route (which is the file path under the <code>routes</code> folder) for which the request is handled by a controller which is an instance of the
+<code>org\zenolithe\kernel\mvc\controllers\SimpleController</code> class which has the <code>viewName</code> property setted to <code>sample2-view</code>.
+<code>SimpleController</code> is a controller defined by the zenolithe framework that render the response with the file defined by the <code>viewName</code> property.
+Be carrefull that the name doesn't have the <code>.php</code> extension.</p>
+<p>Later you will learn to create your own controllers to handle requests.</p>
+
+<h3>Define a view</h3>
+<p>As for the frist sample, we define a <code>sample2-view.php</code> file under the <code>views</code> folder:</p>
+<pre>&lt;!doctype html>
+&lt;html>
+    &lt;head>
+        &lt;title>Zenolithe sample 2&lt;/title>
+    &lt;/head>
+    &lt;body>
+        First zenolithe controlled page !
+    &lt;/body>
+&lt;/html></pre>
+<p>In your browser go to to <code>http://localhost/myapp/sample2.php</code>.</p>
+<p>That's it!</p>
+<p>It's time for you to create your <a href="{{site.baseurl}}en/quick-start/first-controller.html">first controller</a>.</p>
